@@ -6,7 +6,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const eo=t=>1-Math.pow(1-t,3),eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 const tween=(d,fn,e=eo)=>new Promise(res=>{const t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/d);fn(e(p));p<1?requestAnimationFrame(f):res()};requestAnimationFrame(f)});
-const BONE=[237,230,217],GOLD=[230,179,37];
+const BONE=[237,230,217],GOLD=[226,71,42];
 const rgba=(c,a)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
 
 /* ============ THE THRESHOLD SCENE (hero canvas) ============ */
