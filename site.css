@@ -865,8 +865,14 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
   .pp .pp-ini{font-size:32px}
   .pp-x .pp-n{display:block;margin-bottom:10px}
 }
-/* page heroes (LIFT, BUILD, Standard, Team, Begin): homepage headline scale; the threshold line is drawn between the headline and the text below it (see site.js) */
-.phero[aria-labelledby="h1"] h1.display{font-size:clamp(44px,6.4vw,112px);margin-bottom:clamp(40px,7vh,88px)}
-.phero.phero-s[aria-labelledby="h1"] h1.display{margin-bottom:0}
-@media (max-height:820px) and (min-width:821px){.phero[aria-labelledby="h1"] h1.display{font-size:clamp(44px,5.6vw,96px)}}
+/* page heroes (LIFT, BUILD, Standard, Team, Begin): homepage headline scale. The threshold line is drawn below the headline at the
+   homepage's distance (see site.js); the headline's bottom margin keeps that distance plus clear space for the text under the line. */
+.phero[aria-labelledby="h1"] h1.display{font-size:clamp(44px,6.4vw,112px);margin-bottom:calc(clamp(44px,9vh,110px) + clamp(40px,7vh,88px))}
+.phero.phero-s[aria-labelledby="h1"] h1.display{margin-bottom:clamp(44px,9vh,110px)}
+.phero.phero-s[aria-labelledby="h1"]{padding-bottom:clamp(32px,5vh,56px)}
+@media (max-height:820px) and (min-width:821px){
+  .phero[aria-labelledby="h1"] h1.display{font-size:clamp(44px,5.6vw,96px);margin-bottom:calc(clamp(24px,5vh,48px) + clamp(40px,7vh,88px))}
+  .phero.phero-s[aria-labelledby="h1"] h1.display{margin-bottom:clamp(24px,5vh,48px)}
+  .phero.phero-s[aria-labelledby="h1"]{padding-bottom:14px}
+}
 @media (max-width:820px){.phero[aria-labelledby="h1"] h1.display{font-size:clamp(38px,10.4vw,64px)}}

@@ -153,11 +153,14 @@ if(hero){
 }
 /* ---- inner page heroes: calm version of the same space ---- */
 $$('.phero canvas').forEach(c=>{
-  // Page heroes (LIFT, BUILD, Standard, Team, Begin): the threshold line sits just below the headline, as on the homepage.
+  // Page heroes (LIFT, BUILD, Standard, Team, Begin): the threshold line sits below the headline at the
+  // same distance as on the homepage (.hero-conv .hero-horizon margin: clamp(44px,9vh,110px), or clamp(24px,5vh,48px) on short desktop screens).
   const sec=c.parentElement,h=sec.matches('[aria-labelledby="h1"]')&&$('h1',sec);
-  const anchor=h?()=>{const t=sec.getBoundingClientRect().top,n=h.nextElementSibling;return (h.getBoundingClientRect().bottom+(n?n.getBoundingClientRect().top:sec.getBoundingClientRect().bottom))/2-t}:null;
+  const cl=(a,v,b)=>Math.min(b,Math.max(a,v));
+  const gap=()=>{const vw=innerWidth,vh=innerHeight;return (vh<=820&&vw>=821)?cl(24,vh*.05,48):cl(44,vh*.09,110)};
+  const anchor=h?()=>h.getBoundingClientRect().bottom-sec.getBoundingClientRect().top+gap():null;
   const S=Scene(c,{anchor,horizon:+(c.dataset.h||.5),speed:.6,density:.7,vx:.72});
-  if(h&&document.fonts)document.fonts.ready.then(()=>S.size());
+  if(h){document.fonts&&document.fonts.ready.then(()=>S.size());'ResizeObserver' in window&&new ResizeObserver(()=>S.size()).observe(sec)}
 });
 
 /* ============ nav ============ */
