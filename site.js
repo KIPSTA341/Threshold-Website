@@ -152,7 +152,13 @@ if(hero){
     if(i%2===0){await cross();await sleep(2600)}i++;await sleep(400)}})();
 }
 /* ---- inner page heroes: calm version of the same space ---- */
-$$('.phero canvas').forEach(c=>Scene(c,{horizon:+(c.dataset.h||.5),speed:.6,density:.7,vx:.72}));
+$$('.phero canvas').forEach(c=>{
+  // Page heroes (LIFT, BUILD, Standard, Team, Begin): the threshold line sits just below the headline, as on the homepage.
+  const sec=c.parentElement,h=sec.matches('[aria-labelledby="h1"]')&&$('h1',sec);
+  const anchor=h?()=>{const t=sec.getBoundingClientRect().top,n=h.nextElementSibling;return (h.getBoundingClientRect().bottom+(n?n.getBoundingClientRect().top:sec.getBoundingClientRect().bottom))/2-t}:null;
+  const S=Scene(c,{anchor,horizon:+(c.dataset.h||.5),speed:.6,density:.7,vx:.72});
+  if(h&&document.fonts)document.fonts.ready.then(()=>S.size());
+});
 
 /* ============ nav ============ */
 const nav=$('#nav');
