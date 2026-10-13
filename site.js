@@ -152,7 +152,7 @@ if(hero){
     if(i%2===0){await cross();await sleep(2600)}i++;await sleep(400)}})();
 }
 /* ---- inner page heroes: calm version of the same space ---- */
-$$('.phero canvas').forEach(c=>Scene(c,{horizon:.5,speed:.6,density:.7,vx:.72}));
+$$('.phero canvas').forEach(c=>Scene(c,{horizon:+(c.dataset.h||.5),speed:.6,density:.7,vx:.72}));
 
 /* ============ nav ============ */
 const nav=$('#nav');
@@ -226,7 +226,7 @@ if(sorter){
     if(!RM)c.animate([{transform:`translate(${a.left-b.left}px,${a.top-b.top}px)`},{transform:'none'}],{duration:800,easing:'cubic-bezier(.2,.7,.1,1)'})}
   function attempt(c){
     if(c.dataset.k==='resp'){if(c.parentElement===zA)return;c.classList.add('crossed');flip(c,zA);thr.classList.add('hot');setTimeout(()=>thr.classList.remove('hot'),700);msg.textContent=$('b',c).textContent+' crossed. That is outside evidence.'}
-    else{c.classList.add('tried');$('.note',c).textContent='Stays below. We check what it leads to: '+c.dataset.l+'.';msg.textContent=$('b',c).textContent+' is activity. It does not cross on its own.';
+    else{c.classList.add('tried');$('.note',c).textContent='Stays below. We check what it leads to: '+c.dataset.l+'.';msg.textContent=$('b',c).textContent+' is useful work. On its own, it does not prove demand.';
       if(!RM)c.animate([{transform:'none'},{transform:'translateY(-40px)',offset:.4},{transform:'translateY(-30px)',offset:.55},{transform:'translateY(-36px)',offset:.7},{transform:'none'}],{duration:900,easing:'cubic-bezier(.2,.7,.1,1)'})}
   }
   cards.forEach(c=>{
@@ -239,7 +239,7 @@ if(sorter){
       const tr=thr.getBoundingClientRect(),cr=c.getBoundingClientRect();const over=cr.top+cr.height/2<tr.top;
       const cur=c.style.transform;c.style.transform='';
       if(over&&c.dataset.k==='resp'){const a=cr;c.classList.add('crossed');zA.appendChild(c);const b=c.getBoundingClientRect();if(!RM)c.animate([{transform:`translate(${a.left-b.left}px,${a.top-b.top}px)`},{transform:'none'}],{duration:600,easing:'cubic-bezier(.2,.7,.1,1)'});msg.textContent=$('b',c).textContent+' crossed. That is outside evidence.'}
-      else{if(!RM)c.animate([{transform:cur},{transform:'none'}],{duration:700,easing:'cubic-bezier(.34,1.56,.64,1)'});if(over){c.classList.add('tried');$('.note',c).textContent='Stays below. We check what it leads to: '+c.dataset.l+'.';msg.textContent=$('b',c).textContent+' cannot cross. Activity is not progress.'}}};
+      else{if(!RM)c.animate([{transform:cur},{transform:'none'}],{duration:700,easing:'cubic-bezier(.34,1.56,.64,1)'});if(over){c.classList.add('tried');$('.note',c).textContent='Stays below. We check what it leads to: '+c.dataset.l+'.';msg.textContent=$('b',c).textContent+' is useful work. Activity alone does not prove demand.'}}};
     c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end);
     c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();attempt(c)}});
   });
@@ -367,9 +367,9 @@ if(mf){
   const mode=$$('#mode button'),out=$('#mapOut'),send=$('#mapSend');let m='venture';
   mode.forEach(b=>b.addEventListener('click',()=>{m=b.dataset.m;mode.forEach(x=>x.setAttribute('aria-pressed',x===b));$('#f0l').textContent=m==='mission'?'The mission you want to back':'The venture you want to bring';build()}));
   function build(){const v=id=>($('#'+id).value||'').trim();
-    const lines=[(m==='mission'?'BUILD · Bring one mission':'LIFT · Bring one venture'),'',(m==='mission'?'Mission: ':'Venture: ')+(v('f0')||'—'),'Next result: '+(v('f1')||'—'),'Work to do: '+(v('f2')||'—'),'Proof to seek: '+(v('f3')||'—'),'Next decision: '+(v('f4')||'—'),'','From: '+(v('f5')||'—')];
+    const lines=[(m==='mission'?'BUILD · Mission map (optional preparation)':'LIFT · Venture map: next result (optional preparation)'),'',(m==='mission'?'Mission: ':'Venture: ')+(v('f0')||'—'),'Next result: '+(v('f1')||'—'),'Work to do: '+(v('f2')||'—'),'Proof to seek: '+(v('f3')||'—'),'Next decision: '+(v('f4')||'—'),'','From: '+(v('f5')||'—')];
     out.textContent=lines.join('\n');
-    send.href='mailto:nihal@limitless.institute?subject='+encodeURIComponent('Threshold · '+(m==='mission'?'Bring one mission':'Bring one venture'))+'&body='+encodeURIComponent(lines.join('\n'))}
+    send.href='mailto:nihal@limitless.institute?subject='+encodeURIComponent('Threshold · '+(m==='mission'?'BUILD mission map':'LIFT venture map'))+'&body='+encodeURIComponent(lines.join('\n'))}
   $$('input,textarea',mf).forEach(i=>i.addEventListener('input',build));build();
   $('#mapCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(out.textContent);$('#mapMsg').textContent='Copied.'}catch(e){$('#mapMsg').textContent='Select the text and copy it.'}});
 }
