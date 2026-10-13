@@ -876,3 +876,7 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
   .phero.phero-s[aria-labelledby="h1"]{padding-bottom:14px}
 }
 @media (max-width:820px){.phero[aria-labelledby="h1"] h1.display{font-size:clamp(38px,10.4vw,64px)}}
+/* Back to Limitless Institute: small line under the THRESHOLD wordmark, taken out of the flow so nothing else moves */
+.nav-in{position:relative}
+.nav-in .back-li{position:absolute;left:var(--gutter);top:calc(50% + 17px);font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:inherit;opacity:.78;white-space:nowrap;transition:opacity .3s}
+.nav-in .back-li:hover,.nav-in .back-li:focus-visible{opacity:1}
