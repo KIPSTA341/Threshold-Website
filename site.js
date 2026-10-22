@@ -202,60 +202,6 @@ if(bq){
   new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){play();o.disconnect()}},{threshold:.4}).observe($('#track'));
 }
 
-/* ============ AI: stops at the founder (press and hold) ============ */
-const pipe=$('#pipe');
-if(pipe){
-  const tok=$('#tok'),hold=$('#hold'),st=$('#aist'),ps=$$('.p',pipe),gate=$('.gate',pipe);let run=0,armed=false;
-  const vert=()=>getComputedStyle(pipe).gridTemplateColumns.split(' ').length<3;
-  function to(el){const pr=pipe.getBoundingClientRect(),r=el.getBoundingClientRect();
-    tok.style.transform=vert()?`translate(0,${r.top-pr.top+(el===gate?r.height/2-10:0)}px)`:`translate(${r.left-pr.left+(el===gate?r.width/2-10:0)}px,0)`}
-  async function go(){const me=++run;armed=false;pipe.classList.remove('open');tok.classList.remove('done');ps.forEach(p=>p.classList.remove('lit'));hold.disabled=true;hold.style.setProperty('--p',0);hold.classList.remove('full');
-    tok.style.transition='none';to(ps[0]);void tok.offsetWidth;tok.style.transition='';
-    st.innerHTML='<b>Running</b> · assistant researching and drafting';
-    for(let i=0;i<4;i++){if(me!==run)return;ps[i].classList.add('lit');to(ps[i]);await sleep(RM?0:950)}
-    if(me!==run)return;to(gate);await sleep(RM?0:700);
-    st.innerHTML='<b>Stopped</b> · consequential action escalated to the founder';hold.disabled=false;armed=true}
-  let raf=null,t0=0;
-  function start(e){if(!armed)return;e.preventDefault();t0=performance.now();
-    const f=n=>{const p=Math.min(1,(n-t0)/1100);hold.style.setProperty('--p',p);hold.classList.toggle('full',p>.5);if(p<1)raf=requestAnimationFrame(f);else done()};raf=requestAnimationFrame(f)}
-  function stop(){if(raf){cancelAnimationFrame(raf);raf=null}if(armed){hold.style.setProperty('--p',0);hold.classList.remove('full')}}
-  async function done(){raf=null;armed=false;hold.disabled=true;pipe.classList.add('open');st.innerHTML='<b>Approved</b> · by the founder';await sleep(RM?0:450);ps[4].classList.add('lit');to(ps[4]);await sleep(RM?0:900);tok.classList.add('done');st.innerHTML='<b>Done</b> · action taken after founder approval'}
-  hold.addEventListener('pointerdown',start);['pointerup','pointerleave','pointercancel'].forEach(ev=>hold.addEventListener(ev,stop));
-  hold.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)start(e)});hold.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')stop()});
-  $('#aire').addEventListener('click',go);
-  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){go();o.disconnect()}},{threshold:.45}).observe(pipe);
-  addEventListener('resize',()=>{if(tok.classList.contains('done'))to(ps[4]);else if(armed)to(gate)});
-}
-
-/* ============ sorter: drag across the line ============ */
-const sorter=$('#sorter');
-if(sorter){
-  const zA=$('.above',sorter),zB=$('.below',sorter),thr=$('.thr',sorter),msg=$('#smsg'),cards=$$('.card',sorter);
-  function flip(c,dest,before){const a=c.getBoundingClientRect();before?dest.insertBefore(c,before):dest.appendChild(c);const b=c.getBoundingClientRect();
-    if(!RM)c.animate([{transform:`translate(${a.left-b.left}px,${a.top-b.top}px)`},{transform:'none'}],{duration:800,easing:'cubic-bezier(.2,.7,.1,1)'})}
-  function attempt(c){
-    if(c.dataset.k==='resp'){if(c.parentElement===zA)return;c.classList.add('crossed');flip(c,zA);thr.classList.add('hot');setTimeout(()=>thr.classList.remove('hot'),700);msg.textContent=$('b',c).textContent+' crossed. That is outside evidence.'}
-    else{c.classList.add('tried');$('.note',c).textContent='Stays below. We check what it leads to: '+c.dataset.l+'.';msg.textContent=$('b',c).textContent+' is useful work. On its own, it does not prove demand.';
-      if(!RM)c.animate([{transform:'none'},{transform:'translateY(-40px)',offset:.4},{transform:'translateY(-30px)',offset:.55},{transform:'translateY(-36px)',offset:.7},{transform:'none'}],{duration:900,easing:'cubic-bezier(.2,.7,.1,1)'})}
-  }
-  cards.forEach(c=>{
-    let sx,sy,moved=false,id=null;
-    c.addEventListener('pointerdown',e=>{if(c.parentElement===zA)return;id=e.pointerId;sx=e.clientX;sy=e.clientY;moved=false;c.setPointerCapture(id)});
-    c.addEventListener('pointermove',e=>{if(e.pointerId!==id)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(!moved&&Math.hypot(dx,dy)>6){moved=true;c.classList.add('drag')}
-      if(moved){c.style.transform=`translate(${dx}px,${dy}px) rotate(${dx*.01}deg)`;const tr=thr.getBoundingClientRect(),cr=c.getBoundingClientRect();thr.classList.toggle('hot',cr.top<tr.top)}});
-    const end=e=>{if(e.pointerId!==id)return;id=null;c.classList.remove('drag');thr.classList.remove('hot');
-      if(!moved){c.style.transform='';attempt(c);return}
-      const tr=thr.getBoundingClientRect(),cr=c.getBoundingClientRect();const over=cr.top+cr.height/2<tr.top;
-      const cur=c.style.transform;c.style.transform='';
-      if(over&&c.dataset.k==='resp'){const a=cr;c.classList.add('crossed');zA.appendChild(c);const b=c.getBoundingClientRect();if(!RM)c.animate([{transform:`translate(${a.left-b.left}px,${a.top-b.top}px)`},{transform:'none'}],{duration:600,easing:'cubic-bezier(.2,.7,.1,1)'});msg.textContent=$('b',c).textContent+' crossed. That is outside evidence.'}
-      else{if(!RM)c.animate([{transform:cur},{transform:'none'}],{duration:700,easing:'cubic-bezier(.34,1.56,.64,1)'});if(over){c.classList.add('tried');$('.note',c).textContent='Stays below. We check what it leads to: '+c.dataset.l+'.';msg.textContent=$('b',c).textContent+' is useful work. Activity alone does not prove demand.'}}};
-    c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end);
-    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();attempt(c)}});
-  });
-  $('#sall').addEventListener('click',async()=>{for(const c of cards){attempt(c);await sleep(RM?0:240)}msg.textContent='Three crossed. Three stayed below. Founders do the work; we check what changed outside the venture.'});
-  $('#sre').addEventListener('click',()=>{cards.forEach(c=>{c.classList.remove('crossed','tried');$('.note',c)&&($('.note',c).textContent='');zB.appendChild(c)});msg.textContent='Drag a card across the line, or select it.'});
-}
-
 /* ============ gates: the ascent ============ */
 const gates=$('#gates');
 if(gates){
@@ -290,98 +236,8 @@ if(mt){
   ev.textContent=M[0][1];
 }
 
-/* ============ work backwards from the next yes ============ */
-const wb=$('#wb');
-if(wb){
-  const rng=$('#wbr'),line=$('.wb-line',wb),nodes=$$('.wb-node',wb),stops=[0,33,66,100];
-  function upd(){const v=+rng.value;const wide=getComputedStyle($('.wb-nodes',wb)).gridTemplateColumns.split(' ').length===4;
-    line.style.width=wide?((100-v)*(1-0)+0)+'%':'0';
-    nodes.forEach((n,i)=>n.classList.toggle('on',(100-v)>=(100-stops[i])-0.5||i===3));
-    rng.setAttribute('aria-valuetext',['The work this week','The smallest credible test','The evidence they need','The next yes'][Math.round(v/33.34)])}
-  // value 100 = at the next yes; dragging left (rtl) lowers the value toward today
-  rng.addEventListener('input',upd);upd();
-  async function play(){for(let v=100;v>=0;v-=1){rng.value=v;upd();await sleep(RM?0:22)}}
-  $('#wbp').addEventListener('click',()=>{rng.value=100;upd();play()});
-  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){setTimeout(play,500);o.disconnect()}},{threshold:.5}).observe(wb);
-  $$('#yes button').forEach(b=>b.addEventListener('click',()=>{$$('#yes button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#yesT').textContent=b.dataset.y}));
-}
-
-/* ============ follow the cheque ============ */
-const cs=$('#cstage');
-if(cs){
-  const cq=$('#cq'),cqt=$('#cqt'),bt=$('#bart'),msg=$('#cmsg'),roles=$('#roles');
-  const bEv=$('#cEv'),bD=$$('[data-d]'),bPay=$('#cPay'),bRe=$('#cRe');
-  let st=0,x=0;
-  const barX=()=>cs.clientWidth*parseFloat(getComputedStyle(cs.querySelector('.bar')).left)/cs.clientWidth;
-  const maxX=()=>cs.clientWidth-cq.offsetWidth;const stopX=()=>barX()-cq.offsetWidth-10;
-  const setX=(v,anim)=>{x=v;cq.style.transition=anim?'transform 1.1s cubic-bezier(.2,.7,.1,1)':'none';cq.style.transform=`translateX(${v}px)`};
-  const focus=r=>{roles.classList.toggle('focus',!!r);$$('.role',roles).forEach(e=>e.classList.toggle('hot',e.dataset.r===r))};
-  function render(){
-    bEv.disabled=st!==0;bD.forEach(b=>b.disabled=st!==1);bPay.disabled=st!==2;
-    cs.classList.toggle('open',st>=2&&st!==9);cq.classList.toggle('paid',st===3);
-    if(st===0){cqt.textContent='Capital request';bt.textContent='Panel decision required';msg.textContent='A venture requests capital against its next result. Try sending the cheque across.';focus(null)}
-    if(st===1){cqt.textContent='Request + checked evidence';msg.textContent='Threshold has checked dated, attributable evidence. The independent panel decides.';focus('panel')}
-    if(st===2){bt.textContent=bt.dataset.d;msg.textContent='Decision made. Only the sponsor disburses: drag the cheque across, or release it.';focus('sponsor')}
-    if(st===3){cqt.textContent='Disbursed by the sponsor';msg.textContent='Crossed. Threshold never held the capital.';focus('sponsor')}
-    if(st===9){msg.textContent=bt.dataset.m;focus('panel')}
-  }
-  function reset(){st=0;setX(0,true);render()}
-  function block(){cq.classList.remove('shake');void cq.offsetWidth;cq.classList.add('shake');msg.textContent=st===9?bt.dataset.m:'The cheque cannot cross until the panel decides.'}
-  bEv.onclick=()=>{st=1;focus('threshold');msg.textContent='Threshold checks dated, attributable evidence.';setTimeout(render,RM?0:900)};
-  bD.forEach(b=>b.onclick=()=>{const d=b.dataset.d;if(d==='a'||d==='c'){bt.dataset.d=d==='a'?'Approved':'Approved with conditions';st=2;render()}else{bt.textContent=d==='f'?'Deferred':'Declined';bt.dataset.m=d==='f'?'Deferred. The cheque stays with the sponsor. Further funding follows evidence.':'Declined. Not an automatic exit: review the bottleneck, then extend, adapt or pause.';st=9;render();block()}});
-  bPay.onclick=()=>{st=3;setX(maxX(),true);render()};
-  bRe.onclick=reset;
-  let id=null,sx=0,x0=0;
-  cq.addEventListener('pointerdown',e=>{if(st===3)return;id=e.pointerId;sx=e.clientX;x0=x;cq.setPointerCapture(id);cq.classList.add('drag')});
-  cq.addEventListener('pointermove',e=>{if(e.pointerId!==id)return;let v=x0+e.clientX-sx;const lim=st===2?maxX():stopX();if(v>lim){v=lim+Math.min(14,(v-lim)*.15)}setX(clamp(v,0,maxX()))});
-  const up=e=>{if(e.pointerId!==id)return;id=null;cq.classList.remove('drag');
-    if(st===2&&x>barX()-cq.offsetWidth*.4){st=3;setX(maxX(),true);render()}
-    else if(st!==2&&x>=stopX()-2){block();setX(0,true)}
-    else setX(st===2?x:0,true)};
-  cq.addEventListener('pointerup',up);cq.addEventListener('pointercancel',up);
-  addEventListener('resize',()=>{if(st===3)setX(maxX())});
-  render();
-}
-
-/* ============ LIFT: five illustrative routes ============ */
-const lanes=$('#lanes');
-if(lanes){
-  const rows=$$('.lane5',lanes);
-  function shuffle(){rows.forEach(r=>{const cells=$$('i',r);cells.forEach((c,k)=>{c.className=k===0?'b':(k===12?'r':'')});
-    const pick=new Set();while(pick.size<6)pick.add(1+Math.floor(Math.random()*11));[...pick].forEach(k=>cells[k].className='s')})}
-  shuffle();$('#reshuffle')&&$('#reshuffle').addEventListener('click',shuffle);
-}
-
-/* ============ LIFT: selection scoring ============ */
-const sc=$('#score');
-if(sc){
-  const tot=$('#stot'),dq=$('#sdq');
-  function upd(){let s=0;$$('[data-row]',sc).forEach(r=>{const on=$('button[aria-pressed="true"]',r);s+=on?+on.dataset.v:0});
-    const killed=dq.getAttribute('aria-pressed')==='true';sc.classList.toggle('killed',killed);tot.textContent=s+' / 18';$('#snote').textContent=killed?'A hard disqualifier overrides the total score.':'Score evidence, not narrative.'}
-  $$('[data-row]',sc).forEach(r=>$$('button',r).forEach(b=>b.addEventListener('click',()=>{$$('button',r).forEach(x=>x.setAttribute('aria-pressed',x===b&&b.getAttribute('aria-pressed')!=='true'));upd()})));
-  dq.addEventListener('click',()=>{dq.setAttribute('aria-pressed',dq.getAttribute('aria-pressed')!=='true');upd()});upd();
-}
-
-/* ============ BUILD: month-3 gate ============ */
-const g3=$('#g3');
-if(g3){const segs=$$('[data-after]');const out=$('#g3o');
-  $$('button',g3).forEach(b=>b.addEventListener('click',()=>{$$('button',g3).forEach(x=>x.setAttribute('aria-pressed',x===b));const go=b.dataset.v==='go';segs.forEach(s=>s.style.opacity=go?1:.18);out.textContent=go?'Proceed: you deploy capital and the fellowship begins.':'Pause: no fellowship and no capital deployed. You keep the design and the selected pool.'}))}
-
 /* ============ pathway table (BUILD A9) ============ */
 $$('.tbl tbody tr').forEach(tr=>{tr.tabIndex=0;const f=()=>{$$('tr',tr.parentElement).forEach(x=>x.classList.toggle('sel',x===tr))};tr.addEventListener('click',f);tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})});
-
-/* ============ begin: next-result map ============ */
-const mf=$('#mapf');
-if(mf){
-  const mode=$$('#mode button'),out=$('#mapOut'),send=$('#mapSend');let m='venture';
-  mode.forEach(b=>b.addEventListener('click',()=>{m=b.dataset.m;mode.forEach(x=>x.setAttribute('aria-pressed',x===b));$('#f0l').textContent=m==='mission'?'The mission you want to back':'The venture you want to bring';build()}));
-  function build(){const v=id=>($('#'+id).value||'').trim();
-    const lines=[(m==='mission'?'BUILD · Mission map (optional preparation)':'LIFT · Venture map: next result (optional preparation)'),'',(m==='mission'?'Mission: ':'Venture: ')+(v('f0')||'—'),'Next result: '+(v('f1')||'—'),'Work to do: '+(v('f2')||'—'),'Proof to seek: '+(v('f3')||'—'),'Next decision: '+(v('f4')||'—'),'','From: '+(v('f5')||'—')];
-    out.textContent=lines.join('\n');
-    send.href='mailto:nihal@limitless.institute?subject='+encodeURIComponent('Threshold · '+(m==='mission'?'BUILD mission map':'LIFT venture map'))+'&body='+encodeURIComponent(lines.join('\n'))}
-  $$('input,textarea',mf).forEach(i=>i.addEventListener('input',build));build();
-  $('#mapCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(out.textContent);$('#mapMsg').textContent='Copied.'}catch(e){$('#mapMsg').textContent='Select the text and copy it.'}});
-}
 
 /* ============ copy address ============ */
 $$('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent='Copied'}catch(e){b.textContent='Select and copy'}setTimeout(()=>b.textContent='Copy address',2200)}));
