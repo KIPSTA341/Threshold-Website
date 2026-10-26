@@ -750,3 +750,6 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
   .sheet li a span:last-child{line-height:1.5}
   .sheet .foot{padding-top:28px}
 }
+
+.mem .mem-t{display:flex;flex-direction:column;gap:5px}
+.mem .mem-r{font:500 10.5px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
