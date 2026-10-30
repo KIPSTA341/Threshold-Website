@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#0B0C0E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0C0E'/%3E%3Crect x='4' y='19' width='24' height='2' fill='%23EDE6D9'/%3E%3Crect x='19' y='12' width='5' height='5' fill='%23E2472A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Public+Sans:wght@100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="site.css?v=20261026a">
+<link rel="stylesheet" href="site.css?v=20261029a">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -21,14 +21,14 @@
   <div class="wrap nav-in">
     <a class="wm" href="index.html" aria-label="Threshold home">THRESHOLD<i></i></a>
     <a class="back-li" href="https://www.limitless.institute/" target="_top" aria-label="Back to Limitless Institute"><span aria-hidden="true">←</span> <span class="bl-a">Back to </span>Limitless<span class="bl-b"> Institute</span></a>
-    <nav aria-label="Primary"><ul class="nav-links"><li><a href="lift.html">LIFT</a></li><li><a href="build.html">BUILD</a></li><li><a href="standard.html">Standard</a></li><li><a href="team.html">Team</a></li></ul></nav>
+    <nav aria-label="Primary"><ul class="nav-links"><li><a href="lift.html">LIFT</a></li><li><a href="build.html">BUILD</a></li><li><a href="scale.html">SCALE</a></li><li><a href="standard.html">Standard</a></li><li><a href="team.html">Team</a></li></ul></nav>
     <a class="btn" href="begin.html">Begin <span class="ar">→</span></a>
     <button class="menu-b" id="menuB" aria-expanded="false" aria-controls="sheet">MENU</button>
   </div>
 </header>
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="Menu">
   <div class="sheet-top"><span class="wm">THRESHOLD<i></i></span><button class="menu-b" id="sheetX" style="display:inline-block">CLOSE</button></div>
-  <ol><li><a href="lift.html"><span>LIFT</span><span>Existing ventures · Portfolio Preview</span></a></li><li><a href="build.html"><span>BUILD</span><span>Mission + capital · new portfolio</span></a></li><li><a href="standard.html"><span>Standard</span><span>Gates · evidence · decisions</span></a></li><li><a href="team.html"><span>Team</span><span>Programme · venture · AI</span></a></li><li><a href="begin.html"><span>Begin</span><span>Preview or mission call</span></a></li></ol>
+  <ol><li><a href="lift.html"><span>LIFT</span><span>Existing ventures · Portfolio Preview</span></a></li><li><a href="build.html"><span>BUILD</span><span>Mission + capital · new portfolio</span></a></li><li><a href="scale.html"><span>SCALE</span><span>Proven model · next stage of scale</span></a></li><li><a href="standard.html"><span>Standard</span><span>Gates · evidence · decisions</span></a></li><li><a href="team.html"><span>Team</span><span>Programme · venture · AI</span></a></li><li><a href="begin.html"><span>Begin</span><span>Preview or mission call</span></a></li></ol>
   <a class="back-li back-sheet" href="https://www.limitless.institute/" target="_top">← Back to Limitless Institute</a>
   <div class="foot"><a class="btn btn-gold" href="begin.html#lift">Request a Portfolio Preview <span class="ar">→</span></a><a class="btn btn-gold" href="begin.html#build">Map a mission <span class="ar">→</span></a></div>
 </div>
@@ -43,7 +43,7 @@
   </div>
   <div class="hero-horizon wrap"></div>
   <div class="wrap g12 hero-foot">
-    <div class="hero-sup"><span class="tag">Venture Progression as a Service</span><p class="lead">Threshold helps funders build the right venture portfolio or move ventures they already back. We diagnose the constraint, support the work and check the outside response.</p></div>
+    <div class="hero-sup"><span class="tag">Venture Progression as a Service</span><p class="lead">Threshold helps funders build stronger venture portfolios and move the ventures they already back. We identify what is holding each venture back, help founders take focused action, and turn that work into evidence of progress that unlocks the next decision.</p></div>
     <div class="hero-cta">
       <a class="btn btn-gold" href="begin.html#lift">Request a Portfolio Preview <span class="ar">→</span></a>
       <a class="lnk hero-alt" href="build.html">Explore a new venture fellowship <span aria-hidden="true">→</span></a>
@@ -52,8 +52,8 @@
   <p class="sr">Animation: founder activity moves across a dark field toward a bright line. Activity alone does not cross it. An outside response, such as a customer paying, presses against the line, breaks through and is marked in colour.</p>
 </section>
 
-<!-- ROUTE CARDS: LIFT first, BUILD second -->
-<section class="doors" id="doors" data-nav="light" aria-label="Two ways in">
+<!-- ROUTE CARDS: LIFT first (primary), BUILD, SCALE -->
+<section class="doors doors-3" id="doors" data-nav="light" aria-label="Three ways in">
   <a class="door t-char" href="lift.html#preview">
     <span class="no">N° 01 · LIFT</span><span class="tag">You already back ventures</span>
     <p class="big">Which are stuck, why, and what would help them earn their next commitment?</p>
@@ -62,14 +62,23 @@
   </a>
   <a class="door t-wine" href="build.html">
     <span class="no">N° 02 · BUILD</span><span class="tag">You have a mission and capital</span>
-    <p class="big">We design and select a venture portfolio, then run the fellowship if you choose to proceed at Month 3.</p>
+    <p class="big">We design, select and support a venture portfolio built to move your mission forward.</p>
     <span class="go">Explore BUILD <span class="ar">→</span></span>
     <span class="ghost" aria-hidden="true">BUILD</span>
+  </a>
+  <a class="door t-sand" href="scale.html">
+    <span class="no">N° 03 · SCALE</span><span class="tag">You have a proven model</span>
+    <p class="big">What will it take to extend your impact?</p>
+    <span class="go">Explore SCALE <span class="ar">→</span></span>
+    <span class="ghost" aria-hidden="true">SCALE</span>
   </a>
 </section>
 <div class="gstrip t-ink" data-nav="dark" aria-label="The three gates">
   <div class="wrap"><span class="tag">Three gates</span><ol><li><b>First commitment</b></li><li><b>Repeat demand</b></li><li><b>Lasting viability</b></li></ol><a class="lnk" href="standard.html">The standard</a></div>
 </div>
+
+<!-- PROGRESS: two founder-reported cases from the 90-day Fast Track -->
+<section class="sec sec-tight t-bone" id="cases" data-nav="light" aria-labelledby="t-cases"><div class="wrap"><span class="kicker rv">From the <span class="nw">90-day</span> Fast Track</span><h2 class="statement rv d1" id="t-cases" style="margin-top:24px">What progress looks like.</h2><div class="cases cases-2"><article class="case rv d0"><span class="tag mute">ReUpyog · <span class="nw">E-waste</span> refurbishment, India</span><h3 class="case-t">From stalled pilots to paying customers</h3><p>The founder discovered that his offer was speaking to technical teams instead of the finance head making the buying decision. After reshaping the approach, he reported that three stalled pilots became paying customers.</p><blockquote><p>“The biggest shift was working out who my customer really is.”</p><footer>— Ashish Pahwa, ReUpyog</footer></blockquote></article><article class="case rv d1"><span class="tag mute">BuriCare · Newborn care, Uganda</span><h3 class="case-t">Hospital and repeat orders</h3><p>Comfort used customer economics to identify hospitals as a promising channel, then built an outreach list with AI. She reached out to 11 hospitals, closed four deals, and one hospital ordered 20 carriers before returning for 30 more.</p><blockquote><p>“Before Threshold, most of our decisions were guesswork.”</p><footer>— Comfort Peace Ayikoru, BuriCare</footer></blockquote></article></div><p class="disc"><span class="nw">Founder-reported</span> progress from our <span class="nw">90-day</span> Fast Track within an existing fellowship.</p></div></section>
 
 <!-- EXPERIENCE: proof near the first route decision -->
 <section class="sec t-char" id="experience" data-nav="dark" aria-labelledby="t-exp">
@@ -80,9 +89,8 @@
       <p class="lead mute c-8-12 rv d2" style="margin-top:28px">The people behind Threshold have built and run learning and venture programmes across countries, worked with founders facing real delivery constraints, and designed technology that helps teams act. This is their prior experience, brought together for LIFT and BUILD.</p>
     </div>
     <div class="team"><div class="rv d0"><span class="tag">01 · Programmes and communities</span><ul class="mems"><li class="mem"><img src="team-nihal-ahmed.jpg" alt="" width="64" height="64" decoding="async"><span>Nihal Ahmed</span></li><li class="mem"><img src="team-abhijit-sinha.jpg" alt="" width="64" height="64" decoding="async"><span>Abhijit Sinha</span></li><li class="mem"><img src="team-iris-lapinski.jpg" alt="" width="64" height="64" decoding="async"><span class="mem-t">Iris Lapinski<small class="mem-r">Advisor</small></span></li></ul><p>Nihal and Limitless have built learning and venture programmes across five continents. Abhijit Sinha has created <span class="nw">community-led</span> learning spaces in six countries, opening entrepreneurship pathways in marginalised communities. Iris Lapinski, founder of Apps for Good, helped take its work to 1,000 schools.</p></div><div class="rv d1"><span class="tag">02 · Venture and impact practice</span><ul class="mems"><li class="mem"><img src="team-akshay-cherian.jpg" alt="" width="64" height="64" decoding="async"><span>Akshay Cherian</span></li><li class="mem"><img src="team-norm-trainor.jpg" alt="" width="64" height="64" decoding="async"><span class="mem-t">Norm Trainor<small class="mem-r">Advisor</small></span></li><li class="mem"><img src="team-patrick-meier.jpg" alt="" width="64" height="64" decoding="async"><span class="mem-t">Patrick Meier<small class="mem-r">Advisor</small></span></li></ul><p>Akshay Cherian and Norm Trainor bring venture coaching and operating experience. Patrick Meier, an advisor, is a <span class="nw">five-time</span> founder who has deployed technology in more than 40 countries and now leads sustainable ventures at beVisioneers.</p></div><div class="rv d2"><span class="tag">03 · Technology that serves delivery</span><ul class="mems"><li class="mem"><img src="team-varun-perumal.jpg" alt="" width="64" height="64" decoding="async"><span class="mem-t">Varun Perumal<small class="mem-r">Advisor</small></span></li><li class="mem"><img src="team-akshay-cherian.jpg" alt="" width="64" height="64" decoding="async"><span>Akshay Cherian</span></li></ul><p>Varun Perumal, an advisor, has built hardware, software and AI with major global technology companies. Akshay translates AI into practical tools, workflows and assistants for founder and programme work, with people approving consequential actions.</p></div></div>
-    <div class="terms" style="grid-template-columns:1fr;margin-top:clamp(48px,6vw,88px);border-bottom:0"><div class="rv"><span class="k">Prior method example · Meta Results</span><span class="v">$3m in reported client savings</span><span class="s" style="max-width:72ch">In a prior Meta Results engagement, a <span class="nw">two-day</span> workshop and 12 weeks of coaching on live client problems helped a client save $3 million, according to Akshay Cherian, who <span class="nw">co-founded</span> the firm.</span></div></div>
+    <div class="terms" style="grid-template-columns:1fr;margin-top:clamp(48px,6vw,88px);border-bottom:0"><div class="rv"><span class="v">$3 million in reported client savings</span><span class="s" style="max-width:72ch">Team member Akshay Cherian brought this approach to a previous client engagement that reported $3 million in savings.</span></div></div>
     <p class="disc">These are contributors’ prior roles and experience, not outcomes attributed to Threshold or endorsements by their organisations. <a href="team.html" style="color:var(--bone)">Meet the team →</a></p>
-    <div class="same rv"><span class="kicker">Already in use</span><p>Our team is running a <span class="nw">90-day</span> venture Fast Track within an existing fellowship. Founders are using AI skills today; we are testing tailored workflows and lighter <span class="nw">check-ins</span> in live delivery. <a class="lnk" href="lift.html#how" style="color:var(--bone);white-space:nowrap">See how LIFT works</a></p></div>
   </div>
 </section>
 
@@ -93,8 +101,8 @@
     <p class="statement rv d1" style="margin-top:34px">Busy founders and polished reports can still leave the hard question unanswered. <span class="mute">Which ventures are actually getting stronger?</span></p>
     <div class="three">
       <p class="rv"><span class="tag">Founders</span>do the work.</p>
-      <p class="rv d1"><span class="tag">Threshold</span>checks what changed outside the venture.</p>
-      <p class="rv d2"><span class="tag">You</span>back further, adapt or pause, on evidence.</p>
+      <p class="rv d1"><span class="tag">Threshold</span>turns focused action into evidence of progress.</p>
+      <p class="rv d2"><span class="tag">You</span>decide where to back, adapt or pause.</p>
     </div>
   </div>
 </section>
@@ -141,8 +149,8 @@
     <div class="ai">
       <div class="stack">
         <span class="tag mute">AI support</span>
-        <h3 class="h2">AI handles the repeatable. Founders handle the consequential.</h3>
-        <p class="mute small" style="margin:0;max-width:40ch">Assistants research, draft, monitor and prepare next actions. Built for human approval, not <span class="nw">black-box</span> autonomy. In the founding cohort, human support is ready and AI workflows are tested in delivery.</p>
+        <h3 class="h2">Skills → workflows → automations → personal agents</h3>
+        <p class="mute small" style="margin:0;max-width:40ch">Founders first learn practical methods for discovery, offers and decisions. Those skills become repeatable workflows for research, outreach, <span class="nw">follow-up</span> and operations. Where useful, automations handle routine steps. As a founder is ready, supervised personal agents can prepare and coordinate work, with the founder approving consequential actions.</p>
       </div>
       <div class="loop">
         <div class="pipe" aria-label="AI support flow: trigger, research, draft and review, then the founder approves before any action">
@@ -170,9 +178,9 @@
     <div>
       <span class="kicker rv">Does not establish progress</span>
       <p class="nope" style="margin-top:28px" aria-label="Attendance, confidence and projections do not establish progress"><span>Attendance</span><span>Confidence</span><span>Projections</span></p>
-      <div class="g12" style="margin-top:clamp(40px,5vw,72px);row-gap:28px;align-items:end">
-        <div class="c-1-6 stack-s"><span class="tag mute">Evidence must be</span><div class="yes3"><span>Dated</span><span>Attributable</span><span>Checkable</span></div></div>
-        <p class="c-7-12 h3 rv">Starting point → work done → outside evidence → <span class="nw">follow-up</span> check. Activity alone does not prove demand.</p>
+      <div class="g12" style="margin-top:clamp(40px,5vw,72px);row-gap:20px;align-items:start">
+        <h3 class="c-1-5 h2 rv" style="margin:0">Progress has a starting point.</h3>
+        <p class="c-6-12 lead rv d1" style="margin:0">We begin with a rigorous baseline: the venture’s goal, current traction, constraints and the evidence needed for its next step. Weekly targets and <span class="nw">check-ins</span> turn that baseline into action. Regular reviews compare what happened with where the venture started, so founders and funders can see what moved and decide what comes next.</p>
       </div>
     </div>
   </div>
@@ -181,7 +189,7 @@
 <!-- ROUTES -->
 <section class="sec t-bone" id="routes" data-nav="light" aria-labelledby="t-routes">
   <div class="wrap">
-    <span class="kicker rv">Two routes</span>
+    <span class="kicker rv">LIFT and BUILD</span>
     <h2 class="display rv d1" id="t-routes" style="margin-top:28px">Different starting points. <span class="it mute">One standard.</span></h2>
     <div class="rt">
       <div class="rcol rv">
@@ -219,7 +227,7 @@
         <a class="btn" href="build.html">Explore BUILD <span class="ar">→</span></a>
       </div>
     </div>
-    <div class="same rv"><span class="kicker">Same standard</span><p>Three Gates. Dated, attributable, checkable outside evidence. Capital stays with the sponsor. Independent decisions on capital. <span class="nw">Follow-on</span> funding never guaranteed.</p></div>
+    <div class="same rv"><span class="kicker">Same standard</span><p><b>One standard. Different routes.</b> Each venture works towards a meaningful next result, with evidence that fits its model. Sponsors retain control of capital, with investment decisions made independently.</p></div>
   </div>
 </section>
 
@@ -234,30 +242,18 @@
     <p class="gfoot">Every venture has a next result agreed at entry</p>
   </div>
 </section>
+<div class="gstrip gsent t-ink" data-nav="dark">
+  <div class="wrap"><p>We also strengthen the systems, leadership and team practices that help ventures deliver, grow and prepare for future capital.</p></div>
+</div>
 
-<!-- EVIDENCE -->
-<section class="sec t-sand" id="evidence" data-nav="light" aria-labelledby="t-ev">
-  <div class="wrap">
-    <span class="kicker rv">The evidence</span>
-    <h2 class="giant rv d1" id="t-ev" style="margin-top:30px">Activity alone does not prove demand.</h2>
-    <div class="g12" style="margin-top:clamp(28px,4vw,56px)">
-      <p class="lead c-7-12 rv d2">Founder work is useful. Outside response is the evidence of demand.</p>
-    </div>
-    <div class="rt">
-      <div class="rcol rv"><span class="tag mute">Founder activity</span><p class="h2">Sends a proposal</p></div>
-      <div class="rcol rv d1"><span class="tag mute">→ Outside response</span><p class="h2">A customer pays or commits to a defined pilot</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- SAMPLE PROGRESSION BRIEF -->
+<!-- EXAMPLE PROGRESSION BRIEF -->
 <section class="desk t-char" data-nav="dark" aria-labelledby="t-rec">
   <div class="wrap">
     <div class="g12" style="margin-bottom:clamp(40px,5vw,72px)">
-      <div class="c-1-7"><span class="kicker rv">Sample progression brief</span><h2 class="statement rv d1" id="t-rec" style="margin-top:24px">Work backwards from the next decision.</h2></div>
+      <div class="c-1-7"><span class="kicker rv">Example progression brief</span><h2 class="statement rv d1" id="t-rec" style="margin-top:24px">Work backwards from the next decision.</h2></div>
     </div>
-    <article class="doc rv" aria-label="Sample progression brief. Illustrative format, not a result">
-      <div class="doc-h"><span class="tag">Progression brief · sample format</span><span class="tag ill">Illustrative · not a BUILD or LIFT result</span></div>
+    <article class="doc rv" aria-label="Example progression brief. Illustrative format, not a result">
+      <div class="doc-h"><span class="tag">Example progression brief</span><span class="tag ill">Illustrative · not a BUILD or LIFT result</span></div>
       <div class="doc-t">
         <h3 class="display">One venture</h3>
         <p>What a sponsor sees for each venture. The fields are real; the example entries are illustrative and show no outcome.</p>
@@ -270,7 +266,6 @@
         <div><dt>Sponsor decision</dt><dd>Back further, adapt or pause</dd></div>
       </dl>
     </article>
-    <div class="same rv"><span class="kicker">What is proven</span><p><b>Experience behind the work. Evidence from this cohort to follow.</b> The team brings the programme, venture and technology experience above. We are documenting each venture’s starting point, intervention and outside response in the current programme. We will publish named examples and testimonials only with the venture’s permission and enough detail to show what changed.</p></div>
   </div>
 </section>
 
@@ -279,19 +274,19 @@
   <div class="wrap">
     <span class="kicker rv">The decision</span>
     <h2 class="giant rv d1" id="t-dec" style="margin-top:30px">Capital is not a prize. <span class="it mute">Capital has a job.</span></h2>
+    <div class="g12" style="margin-top:clamp(36px,5vw,64px)"><p class="lead c-1-8 rv" style="margin:0"><b>Every dollar and every hour should buy down uncertainty.</b> What must we learn, prove or put in place for this venture to take its next step? We work backwards from that decision, then focus support and capital on the smallest useful action that reduces the uncertainty: a buyer test, a delivery improvement, a new operating system or evidence for a future funder.</p></div>
     <div class="jobs">
-      <div class="job rv"><span class="n">1</span><b>Resolve a doubt</b><q>Will someone pay, adopt or renew?</q><p>Run the smallest credible test.</p></div>
-      <div class="job rv d1"><span class="n">2</span><b>Earn the next bet</b><p>Use the evidence to decide what further support or capital is justified.</p></div>
+      <div class="job rv"><span class="n">1</span><b>Resolve a doubt</b><q>Will someone pay, adopt or renew?</q></div>
+      <div class="job rv d1"><span class="n">2</span><b>Earn the next bet</b><p>Decide what further support or capital is justified.</p></div>
       <div class="job rv d2"><span class="n">3</span><b>Open the next door</b><p>Build the evidence a bigger buyer, lender or funder needs to see.</p></div>
     </div>
 
-    <div class="wb">
-      <div class="g12"><div class="c-1-8"><span class="kicker rv">Work backwards</span><h3 class="statement rv d1" style="margin-top:24px">Start from the next yes. Draw the line back to this week.</h3></div></div>
+    <div class="wb" style="margin-top:clamp(56px,7vw,100px)">
       <div class="wb-stage">
         <div class="wb-nodes">
           <span class="wb-base" aria-hidden="true"></span><span class="wb-line" aria-hidden="true" style="width:100%"></span>
           <div class="wb-node on"><span class="tag">Today</span><b>The work this week</b><p>Review, do the work, check proof on Friday.</p></div>
-          <div class="wb-node on"><span class="tag">Then</span><b>The smallest credible test</b><p>Fund only what resolves the doubt.</p></div>
+          <div class="wb-node on"><span class="tag">Then</span><b>The smallest useful test</b><p>Fund only what reduces the uncertainty.</p></div>
           <div class="wb-node on"><span class="tag">Before that</span><b>The evidence they need</b><p>Dated, attributable and checkable.</p></div>
           <div class="wb-node yes on"><span class="tag">Start here</span><b>The next customer, contract or funder</b><p>Who should want this venture after us?</p></div>
         </div>
@@ -302,7 +297,7 @@
       <div class="g12"><div class="c-1-8"><span class="kicker rv">Governance</span><h3 class="statement rv d1" style="margin-top:24px">Who holds capital. Who verifies. Who decides.</h3></div></div>
       <div class="roles">
         <div class="role" data-r="sponsor"><span class="tag">Sponsor · Capital</span><b>Holds and disburses the capital.</b><p>Owns the mandate and partner relationships.</p></div>
-        <div class="role" data-r="threshold"><span class="tag">Threshold · Evidence</span><b>Runs the programme. Checks the evidence.</b><p>Tracks what each cheque helped achieve. Never holds sponsor capital.</p></div>
+        <div class="role" data-r="threshold"><span class="tag">Threshold · Evidence</span><b>Runs the programme. Checks the evidence.</b><p>Tracks what each cheque helped achieve.</p></div>
         <div class="role" data-r="panel"><span class="tag">Independent panel · Decision</span><b>Approves, conditions, defers or declines.</b><p>Set up with the sponsor before delivery. Independent of Threshold’s delivery team.</p></div>
       </div>
       <div class="never"><span>Threshold never holds sponsor capital</span><span>Never promises or commissions <span class="nw">third-party</span> capital</span><span><span class="nw">Follow-on</span> funding is never guaranteed</span></div>
@@ -311,11 +306,11 @@
     <div style="margin-top:clamp(120px,15vw,220px)">
       <div class="g12"><div class="c-1-8"><span class="kicker rv"><span class="nw">Follow-up</span></span><h3 class="statement rv d1" style="margin-top:24px">Progress doesn’t end at graduation.</h3></div></div>
       <div class="years">
-        <div class="year rv"><span class="tag mute">Year 1</span><p class="q">What changed?</p><p>Starting point, work shipped and outside proof. A recommendation: back further, adapt or pause.</p></div>
-        <div class="year rv d1"><span class="tag mute">Year 2</span><p class="q">Who backed it next?</p><p>New contracts, repeat demand and <span class="nw">follow-on</span> funding. Did the progress last?</p></div>
-        <div class="year rv d2"><span class="tag mute">Year 3+</span><p class="q">Who benefited?</p><p>The livelihood, environmental or community outcomes linked to the mission.</p></div>
+        <div class="year rv"><span class="tag mute">At review</span><p class="q">What changed?</p><p>Starting point, work shipped, outside proof and a recommendation.</p></div>
+        <div class="year rv d1"><span class="tag mute">Later</span><p class="q">Who backed it next?</p><p>New contracts, repeat demand and <span class="nw">follow-on</span> funding.</p></div>
+        <div class="year rv d2"><span class="tag mute">Longer term</span><p class="q">Who benefited?</p><p>Outcomes linked to the mission.</p></div>
       </div>
-      <p class="small mute" style="margin-top:40px">Each <span class="nw">follow-up</span> answers a funding question, not just a reporting requirement. We report contribution, not proven causation.</p>
+      <p class="small mute" style="margin-top:40px">The <span class="nw">follow-up</span> period is agreed in each engagement. Each check answers a funding question, not just a reporting requirement. We report contribution, not proven causation.</p>
     </div>
   </div>
 </section>
@@ -341,9 +336,9 @@
     <div class="foot-line" aria-hidden="true"><i></i></div>
     <div class="foot-g">
       <div><span class="tag">Venture Progression as a Service</span>For foundations, family offices and <span class="nw">mission-led</span> funders.</div>
-      <div><span class="tag">Routes</span><a href="lift.html">LIFT</a><a href="build.html">BUILD</a><a href="standard.html">The Standard</a></div>
-      <div><span class="tag">Begin</span><a href="begin.html#lift">Request a Portfolio Preview</a><a href="begin.html#build">Map a mission</a><a href="mailto:nihal@limitless.institute">nihal@limitless.institute</a></div>
-      <div><span class="tag">Threshold · with Limitless Institute</span>Activity alone does not prove demand.</div>
+      <div><span class="tag">Routes</span><a href="lift.html">LIFT</a><a href="build.html">BUILD</a><a href="scale.html">SCALE</a><a href="standard.html">The Standard</a></div>
+      <div><span class="tag">Begin</span><a href="begin.html#lift">Request a Portfolio Preview</a><a href="begin.html#build">Map a mission</a><a href="begin.html#scale">Discuss scale</a><a href="mailto:nihal@limitless.institute">nihal@limitless.institute</a></div>
+      <div><span class="tag">Threshold · with Limitless Institute</span>Back potential. Build progress.</div>
     </div>
   </div>
 </footer>
