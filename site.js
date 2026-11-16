@@ -114,14 +114,19 @@ if(hero){
   let actEls=[],respEls=[],ri=0,slot=0;
   function mk(cls,h){const e=document.createElement('div');e.className='hlbl '+cls;e.innerHTML=h;lab.appendChild(e);return e}
   const pos=(e,x,y)=>{e._x=x;e._y=y;e.style.transform=`translate(${x}px,${y}px)`};
+  const textBottom=()=>$('h1',hero).getBoundingClientRect().bottom-hero.getBoundingClientRect().top;
   function place(){
     lab.innerHTML='';actEls=[];respEls=[];
     const W=S.W,m=W<700;
     const spots=m?[[-.7,.16]]:[[-1.05,.16],[-.62,.26],[-.28,.1]];
     spots.forEach(([u,z],i)=>{const e=mk('act',ACT[i]);e._u=u;e._z=z;pos(e,S.fx(u,z),S.fy(z));actEls.push(e)});
-    if(RM){RESP.slice(0,m?1:2).forEach((r,i)=>{const e=mk('resp on','<small>Outside response · crossed</small><b>'+r+'</b>');const x=m?W*.38:W*(.6+i*.18);pos(e,x,S.hy-e.offsetHeight-26)})}
+    if(RM){RESP.slice(0,m?1:2).forEach((r,i)=>{const e=mk('resp on','<small>Outside response · crossed</small><b>'+r+'</b>');const x=m?W*.38:W*(.6+i*.18);pos(e,x,Math.max(S.hy-e.offsetHeight-26,textBottom()+20))})}
   }
   place();
+  // Re-measure when the hero or its headline changes size (fonts loading, viewport height), so labels never sit on the text.
+  let rw;const remeasure=()=>{clearTimeout(rw);rw=setTimeout(()=>{S.size();place()},120)};
+  document.fonts&&document.fonts.ready.then(remeasure);
+  if('ResizeObserver' in window){const ro=new ResizeObserver(remeasure);ro.observe(hero);ro.observe($('.hero-top',hero))}
   async function attempt(e){
     const z0=e._z,u=e._u,zt=.035;
     await tween(1600,p=>{const z=z0+(zt-z0)*p;pos(e,S.fx(u,z)-e.offsetWidth*p*.5,S.fy(z)-14*p)},eio);
@@ -143,7 +148,7 @@ if(hero){
     b.t=0;b.v=520;b.live=false;R.gold=true;R.trail=false;R.s=7;
     const beam=S.beam(x);
     const e=mk('resp','<small>Outside response · crossed</small><b>'+RESP[ri++%RESP.length]+'</b>');e._x0=x;respEls.push(e);
-    const ex=Math.min(x+16,W-e.offsetWidth-16);const ey=S.hy-e.offsetHeight-34;
+    const ex=Math.min(x+16,W-e.offsetWidth-16);const ey=Math.max(S.hy-e.offsetHeight-34,textBottom()+20);
     await tween(700,p=>{R.y=S.hy-(S.hy-ey-e.offsetHeight/2+10)*p;beam.h=S.hy-R.y},eo);
     S.setRiser(null);pos(e,ex,ey);e.classList.add('on');
   }
@@ -184,6 +189,7 @@ if(nav){
 /* ============ reveals ============ */
 if('IntersectionObserver' in window&&!RM){
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.classList.remove('pending');io.unobserve(e.target)}}),{rootMargin:'0px 0px -12% 0px',threshold:.12});
+  document.documentElement.classList.add('rv-js');
   $$('.rv,.nope').forEach(el=>{if(el.classList.contains('nope'))el.classList.add('pending');io.observe(el)});
 }else document.documentElement.classList.add('no-io');
 
